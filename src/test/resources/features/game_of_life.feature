@@ -1,5 +1,11 @@
 Feature: Game of Life
 
+  Background:
+    Given a 3x3 grid of dead cells
+    And a coordinate positions system represented by the syntax [x, y]
+    And the top left cell is at position [0,0]
+    And the bottom left cell is at position [2, 0]
+
   Rule: Cell dies from underpopulation
   Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
 
@@ -35,3 +41,21 @@ Feature: Game of Life
       And a live cell at [1, 2]
       When I update the grid
       Then the cell at [1, 1] should be dead
+
+  Rule: Live cell stays alive
+  Any live cell with two or three live neighbours lives on to the next generation
+
+  Scenario: Live cell with two neighbours
+    Given a live cell at position [1, 0]
+    And a live cell at position [1, 1]
+    And a live cell at position [1, 2]
+    When I update the grid
+    Then the cell at position [1, 1] stays alive
+
+  Scenario: Live cell with three neighbours
+    Given a live cell at position [0, 0]
+    And a live cell at position [0, 2]
+    And a live cell at position [2, 0]
+    And a live cell at position [1, 1]
+    When I update the grid
+    Then the cell at position [1, 1] stays alive

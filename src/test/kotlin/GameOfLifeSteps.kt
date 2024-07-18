@@ -5,7 +5,7 @@ import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
 import kotlin.test.assertEquals
 
-class GolTests {
+class GameOfLifeSteps {
 
     private lateinit var grid: Array<Array<Boolean>>
 

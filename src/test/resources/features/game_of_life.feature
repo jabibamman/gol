@@ -11,7 +11,7 @@ Feature: Game of Life
 
     Example: A live cell in the center
       Given a 3x3 grid of cells
-      When the center cell is alive
+      When the center (position [1,1]) cell is alive
       And all other cells are dead
       Then the graphical representation is
         |-|-|-|

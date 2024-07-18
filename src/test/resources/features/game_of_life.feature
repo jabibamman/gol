@@ -26,12 +26,10 @@ Feature: Game of Life
   Rule: Cell dies from overcrowding
   Any live cell with more than three live neighbours dies, as if by overcrowding.
 
-    Scenario: Cell with four live neighbours dies
+    Scenario: Live cell with four live neighbours dies
       Given a 3x3 grid
-      And a live cell at [1, 1]
-      And a live cell at [0, 1]
-      And a live cell at [0, 2]
-      And a live cell at [1, 0]
-      And a live cell at [1, 2]
+        | - | X | - |
+        | X | X | X |
+        | - | X | - |
       When I update the grid
       Then the cell at [1, 1] should be dead

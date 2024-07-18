@@ -47,7 +47,7 @@ class Grid(private val x: Int, private val y: Int) {
             string += '\n'
         }
 
-        return string;
+        return string.trim()
     }
 
     operator fun get(index: Int): MutableList<Char> {
@@ -57,8 +57,34 @@ class Grid(private val x: Int, private val y: Int) {
 
 class GameOfLife(private val grid: Grid) {
 
-    fun update(): Unit {
-        // TODO
+    fun update() {
+        val newGrid = Grid(grid.getLimits().x + 1, grid.getLimits().y + 1)
+
+        for (i in 0..grid.getLimits().x) {
+            for (j in 0..grid.getLimits().y) {
+                val liveNeighbours = countLiveNeighbours(i, j)
+
+                if (grid.isAlive(i, j)) {
+                    if (liveNeighbours < 2 || liveNeighbours > 3) {
+                        newGrid.setAsDead(i, j)
+                    } else {
+                        newGrid.setAsAlive(i, j)
+                    }
+                } else {
+                    if (liveNeighbours == 3) {
+                        newGrid.setAsAlive(i, j)
+                    } else {
+                        newGrid.setAsDead(i, j)
+                    }
+                }
+            }
+        }
+
+        for (i in 0..grid.getLimits().x) {
+            for (j in 0..grid.getLimits().y) {
+                grid.map[i][j] = newGrid.map[i][j]
+            }
+        }
     }
 
     fun countLiveNeighbours(row: Int, col: Int): Int {

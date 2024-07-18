@@ -58,16 +58,17 @@ Feature: Game of Life
   Any live cell with two or three live neighbours lives on to the next generation
 
   Scenario: Live cell with two neighbours
-    Given a live cell at position [1, 0]
-    And a live cell at position [1, 1]
-    And a live cell at position [1, 2]
+    Given the following grid
+      |-|-|-|
+      |X|X|X|
+      |-|-|-|
     When I update the grid
     Then the cell at position [1, 1] stays alive
 
   Scenario: Live cell with three neighbours
-    Given a live cell at position [0, 0]
-    And a live cell at position [0, 2]
-    And a live cell at position [2, 0]
-    And a live cell at position [1, 1]
+    Given the following grid
+      |X|-|X|
+      |-|X|-|
+      |X|-|-|
     When I update the grid
     Then the cell at position [1, 1] stays alive

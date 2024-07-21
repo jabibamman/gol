@@ -2,7 +2,7 @@ package com.gameoflife
 
 data class MapSize(var x: Int, var y: Int)
 
-class Grid(private val x: Int, private val y: Int) {
+class Grid(x: Int, y: Int) {
     val map: MutableList<MutableList<Char>> = mutableListOf()
     private val size: MapSize = MapSize(x, y)
 
@@ -17,10 +17,10 @@ class Grid(private val x: Int, private val y: Int) {
     }
 
     fun getLimits(): MapSize {
-        return this.size.copy(this.size.x - 1, this.size.y - 1)
+        return this.size.copy(x = this.size.x - 1, y = this.size.y - 1)
     }
 
-    fun setAsAlive(x: Int, y: Int): Unit {
+    fun setAsAlive(x: Int, y: Int) {
         this.map[x][y] = 'X'
     }
 
@@ -28,7 +28,7 @@ class Grid(private val x: Int, private val y: Int) {
         return this.map[x][y] == 'X'
     }
 
-    fun setAsDead(x: Int, y: Int): Unit {
+    fun setAsDead(x: Int, y: Int) {
         this.map[x][y] = '-'
     }
 
@@ -37,7 +37,7 @@ class Grid(private val x: Int, private val y: Int) {
     }
 
     override fun toString(): String {
-        var string: String = ""
+        var string = ""
 
         for (row in this.map) {
             string += '|'
@@ -87,8 +87,8 @@ class GameOfLife(private val grid: Grid) {
         }
     }
 
-    fun countLiveNeighbours(row: Int, col: Int): Int {
-        var numLiveNeighbours: Int = 0
+    private fun countLiveNeighbours(row: Int, col: Int): Int {
+        var numLiveNeighbours = 0
 
         val (maxColIndex, maxRowIndex) = this.grid.getLimits()
 
